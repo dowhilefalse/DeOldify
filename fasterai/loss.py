@@ -23,7 +23,7 @@ class FeatureLoss(nn.Module):
 
     def forward(self, input, target, sum_layers:bool=True):
         self.m(VV(target.data))
-        res = [F.l1_loss(input,target)/100]
+        res = [F.l2_loss(input,target)/100]
         targ_feat = [V(o.features.data.clone()) for o in self.sfs]
         self.m(input)
         res += [F.l1_loss(self._flatten(inp.features),self._flatten(targ))*wgt
